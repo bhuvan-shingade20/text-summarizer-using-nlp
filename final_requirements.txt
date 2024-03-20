@@ -1,0 +1,21 @@
+streamlit
+spacy
+spacy_streamlit
+textblob
+pattern
+beautifulsoup4
+html5lib
+click
+sumy
+pysummarization
+torch
+torchvision
+torchaudio
+transformers
+sentencepiece
+pyodbc
+boto
+boto3
+botocore
+openai
+altair == 4.0
