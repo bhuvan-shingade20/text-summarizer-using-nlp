@@ -18,4 +18,4 @@ boto
 boto3
 botocore
 openai
-altair == 4.0
+altair==4.0
