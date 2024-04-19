@@ -5,7 +5,6 @@ RUN apt-get update && apt-get install -y default-mysql-client default-libmysqlcl
 WORKDIR /app
 
 COPY . /app
-RUN pip install mysqlclient-1.4.6-cp38-cp38-win_amd64.whl
 RUN pip install -r final_requirements.txt
 RUN python -m spacy download en_core_web_sm
 
