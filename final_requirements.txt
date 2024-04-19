@@ -13,7 +13,6 @@ torchvision
 torchaudio
 transformers
 sentencepiece
-pyodbc
 boto
 boto3
 botocore
