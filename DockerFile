@@ -4,7 +4,7 @@ RUN apt update -y && apt install awscli -y
 WORKDIR /app
 
 COPY . /app
-RUN mysqlclient-2.2.4-cp310-cp310-win_amd64.whl
+RUN pip install mysqlclient-2.2.4-cp310-cp310-win_amd64.whl
 RUN pip install -r final_requirements.txt
 RUN python -m spacy download en_core_web_sm
 
