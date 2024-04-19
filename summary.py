@@ -167,27 +167,9 @@ def main():
         if st.checkbox("superlative"):
             st.success(superlative(text2))
         
-        
-        
-
-        
-            
-        
-            
-        
-            
-            
-           
-            
-            
-      
-        
-   
-
-        
-    
-       
-    
+          
 if __name__ == '__main__':
+    port = 8080
     main()
+    st.run(port = port)
 
