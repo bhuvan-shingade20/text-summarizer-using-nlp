@@ -1,16 +1,9 @@
-"""
-Source code for the paper "Centroid-based Text Summarization through Compositionality of Word Embeddings"
-https://aclanthology.org/W17-1003/
-
-Author: Gaetano Rossiello
-Email: gaetano.rossiello@ibm.com
-"""
-from text_summarizer import base
+from text_translator import base
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 
 
-class CentroidBOWSummarizer(base.BaseSummarizer):
+class CentroidBOWtranslatorr(base.Basetranslatorr):
 
     def __init__(self,
                  language='english',
@@ -25,12 +18,12 @@ class CentroidBOWSummarizer(base.BaseSummarizer):
         self.sim_threshold = sim_threshold
         return
 
-    def summarize(self, text, limit_type='word', limit=100):
-        raw_sentences = self.sent_tokenize(text)
-        clean_sentences = self.preprocess_text(text)
+    def translator(self, text, limit_type='word', limit=100):
+        raw_translator = self.sent_tokenize(text)
+        clean_translator = self.preprocess_text(text)
 
         vectorizer = CountVectorizer()
-        sent_word_matrix = vectorizer.fit_transform(clean_sentences)
+        sent_word_matrix = vectorizer.fit_transform(clean_translator)
 
         transformer = TfidfTransformer(norm=None, sublinear_tf=False, smooth_idf=False)
         tfidf = transformer.fit_transform(sent_word_matrix)
@@ -42,31 +35,31 @@ class CentroidBOWSummarizer(base.BaseSummarizer):
             if centroid_vector[i] <= self.topic_threshold:
                 centroid_vector[i] = 0
 
-        sentences_scores = []
+        translator_scores = []
         for i in range(tfidf.shape[0]):
             score = base.similarity(tfidf[i, :], centroid_vector)
-            sentences_scores.append((i, raw_sentences[i], score, tfidf[i, :]))
+            translator_scores.append((i, raw_translator[i], score, tfidf[i, :]))
 
-        sentence_scores_sort = sorted(sentences_scores, key=lambda el: el[2], reverse=True)
-
+        sentence_scores_sort = sorted(translator_scores, key=lambda el: el[2], reverse=True)
+# very imp
         count = 0
-        sentences_summary = []
+        translator_summary = []
         for s in sentence_scores_sort:
             if count > limit:
                 break
             include_flag = True
-            for ps in sentences_summary:
+            for ps in translator_summary:
                 sim = base.similarity(s[3], ps[3])
                 # print(s[0], ps[0], sim)
                 if sim > self.sim_threshold:
                     include_flag = False
             if include_flag:
                 # print(s[0], s[1])
-                sentences_summary.append(s)
+                translator_summary.append(s)
                 if limit_type == 'word':
                     count += len(s[1].split())
                 else:
                     count += len(s[1])
 
-        summary = "\n".join([s[1] for s in sentences_summary])
+        summary = "\n".join([s[1] for s in translator_summary])
         return summary
