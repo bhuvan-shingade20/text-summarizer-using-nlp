@@ -67,7 +67,7 @@ def st_calculator(calc_html,width=1000,height=1350):
 	page = calc_file.read()
 	components.html(page,width=width,height=height,scrolling=False)
     
-
+#main
 
 def main():
     activites = ["Summary","Tokenizer","Synonyms","Translator","Search","Spell Correction"]
