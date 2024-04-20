@@ -86,9 +86,13 @@ jobs:
         run: |
          docker pull ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
          
-      - name: Stop and remove container if running
+      # - name: Stop and remove container if running
+      #   run: |
+      #    docker ps -q --filter "name=texts" | grep -q . && docker stop texts && docker rm -fv texts
+
+      - name: Set OpenAI API key environment variable
         run: |
-         docker ps -q --filter "name=texts" | grep -q . && docker stop texts && docker rm -fv texts
+         echo "export OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> $GITHUB_ENV
        
       - name: Run Docker Image to serve users
         run: |
