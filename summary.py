@@ -15,7 +15,7 @@ nlp = spacy.load('en_core_web_sm')
 
 #custom funtion 
 def summary(text):
-    openai.api_key ="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"
+    openai.api_key ="sk-proj-1b0mevjQy74Qi70bIUknT3BlbkFJpTzpx0E7XY9iWriN9W86"
     response = openai.completions.create(
         model="gpt-3.5-turbo-instruct",  # Choose the appropriate engine
         prompt=f"Summarize the following text:\n{text}",
@@ -24,7 +24,7 @@ def summary(text):
     return(response.choices[0].text)
 
 def meaning(text):
-    openai.api_key ="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"
+    openai.api_key ="sk-proj-1b0mevjQy74Qi70bIUknT3BlbkFJpTzpx0E7XY9iWriN9W86"
     response = openai.completions.create(
         model="gpt-3.5-turbo-instruct",  # Choose the appropriate engine
         prompt=f"Give me 5 synonyms for the following text: \n{text}",
@@ -33,7 +33,7 @@ def meaning(text):
     return(response.choices[0].text)
 
 def definition(text):
-    openai.api_key ="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"
+    openai.api_key ="sk-proj-1b0mevjQy74Qi70bIUknT3BlbkFJpTzpx0E7XY9iWriN9W86"
     response = openai.completions.create(
         model="gpt-3.5-turbo-instruct",  # Choose the appropriate engine
         prompt=f"Give me a very short definition for the following text: \n{text}",
@@ -42,7 +42,7 @@ def definition(text):
     return(response.choices[0].text)
 
 def example(text):
-    openai.api_key ="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"
+    openai.api_key ="sk-proj-1b0mevjQy74Qi70bIUknT3BlbkFJpTzpx0E7XY9iWriN9W86"
     response = openai.completions.create(
         model="gpt-3.5-turbo-instruct",  # Choose the appropriate engine
         prompt=f"Give me a example sentence for the following text: \n{text}",
@@ -51,7 +51,7 @@ def example(text):
     return(response.choices[0].text)
 
 def translate(text, a):
-    openai.api_key ="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"
+    openai.api_key ="sk-proj-1b0mevjQy74Qi70bIUknT3BlbkFJpTzpx0E7XY9iWriN9W86"
     response = openai.completions.create(
         model="gpt-3.5-turbo-instruct",  # Choose the appropriate engine
         prompt=f"Translate the following text {text} to {a}", 
@@ -169,7 +169,5 @@ def main():
         
           
 if __name__ == '__main__':
-    port = 8080
     main()
-    st.run(port = port)
 
