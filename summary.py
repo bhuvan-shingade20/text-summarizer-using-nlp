@@ -10,13 +10,16 @@ from pattern.en import pluralize , singularize,comparative, superlative
 import torch
 import codecs
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 import openai
 nlp = spacy.load('en_core_web_sm')
 
 #custom funtion 
 def summary(text):
-    openai.api_key = os.environ.get("OPENAI_API_KEY")
+    openai.api_key = os.getenv("api_key")
     response = openai.completions.create(
         model="gpt-3.5-turbo-instruct",  # Choose the appropriate engine
         prompt=f"Summarize the following text:\n{text}",
@@ -25,7 +28,7 @@ def summary(text):
     return(response.choices[0].text)
 
 def meaning(text):
-    openai.api_key =os.environ.get("OPENAI_API_KEY")
+    openai.api_key = os.getenv("api_key")
     response = openai.completions.create(
         model="gpt-3.5-turbo-instruct",  # Choose the appropriate engine
         prompt=f"Give me 5 synonyms for the following text: \n{text}",
@@ -34,7 +37,7 @@ def meaning(text):
     return(response.choices[0].text)
 
 def definition(text):
-    openai.api_key =os.environ.get("OPENAI_API_KEY")
+    openai.api_key = os.getenv("api_key")
     response = openai.completions.create(
         model="gpt-3.5-turbo-instruct",  # Choose the appropriate engine
         prompt=f"Give me a very short definition for the following text: \n{text}",
@@ -43,7 +46,7 @@ def definition(text):
     return(response.choices[0].text)
 
 def example(text):
-    openai.api_key =os.environ.get("OPENAI_API_KEY")
+    openai.api_key = os.getenv("api_key")
     response = openai.completions.create(
         model="gpt-3.5-turbo-instruct",  # Choose the appropriate engine
         prompt=f"Give me a example sentence for the following text: \n{text}",
@@ -52,7 +55,7 @@ def example(text):
     return(response.choices[0].text)
 
 def translate(text, a):
-    openai.api_key = os.environ.get("OPENAI_API_KEY")
+    openai.api_key = os.getenv("api_key")
     response = openai.completions.create(
         model="gpt-3.5-turbo-instruct",  # Choose the appropriate engine
         prompt=f"Translate the following text {text} to {a}", 
