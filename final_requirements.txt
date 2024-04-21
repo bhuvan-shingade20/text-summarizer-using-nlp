@@ -17,5 +17,6 @@ boto
 boto3
 botocore
 openai
+python-dotenv
 altair==4.0
 
