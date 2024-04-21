@@ -1,10 +1,4 @@
-"""
-Source code for the paper "Centroid-based Text Summarization through Compositionality of Word Embeddings"
-https://aclanthology.org/W17-1003/
 
-Author: Gaetano Rossiello
-Email: gaetano.rossiello@ibm.com
-"""
 import re
 import string
 import unidecode
@@ -13,7 +7,7 @@ from nltk.tokenize import sent_tokenize as nltk_sent_tokenize
 from nltk.tokenize import word_tokenize as nltk_word_tokenize
 from nltk.corpus import stopwords
 from scipy.spatial.distance import cosine
-from gensim.summarization.textcleaner import split_sentences as gensim_sent_tokenize
+from gensim.summarization.textcleaner import split_tokenizer as gensim_sent_tokenize
 import flashtext
 
 
@@ -62,9 +56,9 @@ class BaseSummarizer:
         return sents_filtered
 
     def preprocess_text_nltk(self, text):
-        sentences = self.sent_tokenize(text)
-        sentences_cleaned = []
-        for sent in sentences:
+        tokenizer = self.sent_tokenize(text)
+        tokenizer_cleaned = []
+        for sent in tokenizer:
             if self.stopwords_remove:
                 sent = self.stopword_remover.replace_keywords(sent).replace(
                     "###nul###", ""
@@ -73,20 +67,20 @@ class BaseSummarizer:
             words = [w for w in words if w not in string.punctuation]
             words = [w for w in words if w not in self.extra_stopwords]
             words = [w.lower() for w in words]
-            sentences_cleaned.append(" ".join(words))
-        return sentences_cleaned
+            tokenizer_cleaned.append(" ".join(words))
+        return tokenizer_cleaned
 
     def preprocess_text_regexp(self, text):
-        sentences = self.sent_tokenize(text)
-        sentences_cleaned = []
-        for sent in sentences:
+        tokenizer = self.sent_tokenize(text)
+        tokenizer_cleaned = []
+        for sent in tokenizer:
             sent_ascii = unidecode.unidecode(sent)
             cleaned_text = re.sub("[^a-zA-Z0-9]", " ", sent_ascii)
             if self.stopwords_remove:
                 cleaned_text = self.stopword_remover.replace_keywords(cleaned_text)
             words = cleaned_text.lower().split()
-            sentences_cleaned.append(" ".join(words))
-        return sentences_cleaned
+            tokenizer_cleaned.append(" ".join(words))
+        return tokenizer_cleaned
 
     def preprocess_text(self, text):
         if self.preprocess_type == "nltk":

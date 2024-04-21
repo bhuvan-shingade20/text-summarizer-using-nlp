@@ -18,7 +18,6 @@ import openai
 nlp = spacy.load('en_core_web_sm')
 
 key = os.environ.get("OPENAI_API_KEY")
-
 #custom funtion 
 def summary(text):
     openai.api_key = key
@@ -87,7 +86,7 @@ def main():
        
         # text_range= st.sidebar.slider("Summarize words Range",25,500)
         text = st.text_area("Input Text For Summary",height=250)
-        if st.button("summarize"):
+        if st.button("Summarize"):
             st.success(summary(text))
         #if st.button("summarize"):
            #st.warning(summary(text,word_count=text_range))
@@ -97,7 +96,7 @@ def main():
 	<div style="background-color:#16A085;"><p style="color:white;font-size:60px;">Text Tokenizer</p></div>
 	"""
         components.html(html_temp1)
-        row_data = st.text_area("write Text For Tokenizer")
+        row_data = st.text_area("Write Text For Tokenizer")
         docx= nlp(row_data)
         if st.button("Tokenizer"):
             spacy_streamlit.visualize_tokens(docx,attrs=['text','pos_','dep_','ent_type_'])

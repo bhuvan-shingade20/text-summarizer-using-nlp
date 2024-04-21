@@ -1,14 +1,8 @@
-"""
-Source code for the paper "Centroid-based Text Summarization through Compositionality of Word Embeddings"
-https://aclanthology.org/W17-1003/
 
-Author: Gaetano Rossiello
-Email: gaetano.rossiello@ibm.com
-"""
-from text_summarizer import base
+from text_synonym import base
 
 
-class LeadSummarizer(base.BaseSummarizer):
+class Leadsynonymr(base.Basesynonymr):
     def __init__(
         self,
         language="english",
@@ -22,7 +16,7 @@ class LeadSummarizer(base.BaseSummarizer):
         )
         return
 
-    def summarize(self, text, limit_type="word", limit=100):
+    def synonym(self, text, limit_type="word", limit=100):
         raw_sentences = self.sent_tokenize(text)
         count = 0
         sentences_summary = []
